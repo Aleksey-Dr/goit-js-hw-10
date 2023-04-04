@@ -26,9 +26,32 @@ const DEBOUNCE_DELAY = 300;
 // Added listener for input with function fetchCountries() in callback
 refs.inputCountry.addEventListener('input',
     // Added debounce function
-    debounce(() =>
-        fetchCountries(), DEBOUNCE_DELAY)
+    debounce( 
+        onSearch, DEBOUNCE_DELAY)
 );
+
+function onSearch(evt) {
+    // stop reboot page
+    evt.preventDefault();
+    const countryName = refs.inputCountry.value.trim();
+    console.log(countryName);
+    // Cleare markup when input clean
+    if (!countryName) {
+        refs.countryList.innerHTML = '';
+        refs.countryInfo.innerHTML = '';
+        return;
+    }
+    // Show message when error
+    if (countryName != '') {
+        fetchCountries(countryName)
+            .then(renderCountry)
+            .catch(error => {
+                refs.countryList.innerHTML = '';
+                refs.countryInfo.innerHTML = '';
+                console.log("Oops, there is no country with that name", error)
+            });
+    }
+}
 
 // Added function for rendering markup when found country/countries
 function renderCountry(countries) {
