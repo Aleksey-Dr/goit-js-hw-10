@@ -29,3 +29,38 @@ refs.inputCountry.addEventListener('input',
     debounce(() =>
         fetchCountries(), DEBOUNCE_DELAY)
 );
+
+// Added function for rendering markup when found country/countries
+function renderCountry(countries) {
+    // console.log(countries);
+    // switzerland
+    // When found 1 a country
+    if (countries.length === 1) {
+        refs.countryList.innerHTML = '';
+        const markup = countries.map((country) => {
+            return `<img src="${country.flags.svg}" alt="${country.official}" width='80'>
+        <h2>${country.name.official}</h2>
+        <p><b>Capital</b>: ${country.capital[0]}</p>
+        <p><b>Population</b>: ${country.population}</p>
+        <p><b>Languages</b>: ${Object.values(country.languages)}</p>`;
+        })
+            .join("");
+        refs.countryInfo.innerHTML = markup;
+    // When found from 2 to 10 countries
+    } else if (countries.length > 1 && countries.length < 11) {
+        refs.countryInfo.innerHTML = '';
+        const markup = countries.map((country) => {
+            return `<li class="item-card">
+            <img src="${country.flags.svg}" alt="${country.flags.alt}" width="30" class="img-item">
+            ${country.name.official}
+            </li>`;
+        })
+            .join("");
+        refs.countryList.innerHTML = markup;
+    // When found more 10 countries
+    } else if (countries.length > 10) {
+        refs.countryList.innerHTML = '';
+        // Message when found too many countries. List cleaned
+        return console.log("Too many matches found. Please enter a more specific name.");
+    }
+}
