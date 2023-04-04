@@ -18,3 +18,18 @@ body {
   max-width: 320px;
   margin-bottom: 16px;
 }
+
+/* Add more styles */
+ul {
+  list-style: none;
+}
+
+.img-item {
+  margin-right: 15px;
+}
+
+.item-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
