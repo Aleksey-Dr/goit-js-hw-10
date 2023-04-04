@@ -3,3 +3,25 @@ import './css/styles.css';
 import debounce from "lodash.debounce";
 // Add Report from library notiflix
 import { Report } from "notiflix/build/notiflix-report-aio";
+// Import fetchCountries
+import { fetchCountries } from './fetchCountries';
+// console.log(fetchCountries);
+
+// console.log('Hello!');
+
+// Find elements
+// Create object with elements
+const refs = {
+    inputCountry: document.querySelector('#search-box'),
+    countryInfo: document.querySelector('.country-info'),
+    countryList: document.querySelector('.country-list'),
+};
+// console.log(refs.inputCountry);
+// console.log(refs.countryInfo);
+// console.log(refs.countryList);
+
+// Added listener for input with function fetchCountries() in callback
+refs.inputCountry.addEventListener('input',
+    () =>
+        fetchCountries()
+);
