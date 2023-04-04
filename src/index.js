@@ -1,8 +1,8 @@
 import './css/styles.css';
 // Add debounce from library lodash
 import debounce from "lodash.debounce";
-// Add Report from library notiflix
-import { Report } from "notiflix/build/notiflix-report-aio";
+// Add Notiflix from library notiflix
+import Notiflix from 'notiflix';
 // Import fetchCountries
 import { fetchCountries } from './fetchCountries';
 // console.log(fetchCountries);
@@ -48,7 +48,8 @@ function onSearch(evt) {
             .catch(error => {
                 refs.countryList.innerHTML = '';
                 refs.countryInfo.innerHTML = '';
-                console.log("Oops, there is no country with that name", error)
+                Notiflix.Notify.failure("Oops, there is no country with that name");
+                console.log(error)
             });
     }
 }
@@ -84,6 +85,6 @@ function renderCountry(countries) {
     } else if (countries.length > 10) {
         refs.countryList.innerHTML = '';
         // Message when found too many countries. List cleaned
-        return console.log("Too many matches found. Please enter a more specific name.");
+        return Notiflix.Notify.info("Too many matches found. Please enter a more specific name.");
     }
 }
