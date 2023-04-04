@@ -20,8 +20,12 @@ const refs = {
 // console.log(refs.countryInfo);
 // console.log(refs.countryList);
 
+// Added CONST for delay
+const DEBOUNCE_DELAY = 300;
+
 // Added listener for input with function fetchCountries() in callback
 refs.inputCountry.addEventListener('input',
-    () =>
-        fetchCountries()
+    // Added debounce function
+    debounce(() =>
+        fetchCountries(), DEBOUNCE_DELAY)
 );

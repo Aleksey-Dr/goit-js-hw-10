@@ -2,7 +2,7 @@
 // Added export
 export function fetchCountries(name) {
     // Parts URL
-    // name = 'deutschland'
+    name = 'deutschland'
     const frontURL = 'https://restcountries.com/v3.1/name/';
     const backURL = '?fields=name,capital,population,flags,languages';
     // Complete URL
@@ -15,17 +15,17 @@ export function fetchCountries(name) {
                 throw new Error(response.status);
             }
             return response.json();
+        })
+        .then(countries => {
+            for (const country of countries) {
+                // console.log(countries);
+                // console.log(country);
+                // console.log(name.name);
+                console.log(country.name.official);
+                console.log(country.capital[0]);
+                console.log(country.population);
+                console.log(country.flags.svg);
+                console.log(...Object.values(country.languages));
+            }
         });
-        // .then(countries => {
-        //     for (const country of countries) {
-        //         // console.log(countries);
-        //         // console.log(country);
-        //         // console.log(name.name);
-        //         console.log(country.name.official);
-        //         console.log(country.capital[0]);
-        //         console.log(country.population);
-        //         console.log(country.flags.svg);
-        //         console.log(...Object.values(country.languages));
-        //     }
-        // });
 }
